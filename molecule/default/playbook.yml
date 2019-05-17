@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: computerlyrik.bitbucket_backup
+      vars:
+        bitbucket_backup__search_user: "computerlyrik"
+        paging: false

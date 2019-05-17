@@ -1,0 +1,17 @@
+galaxy_info:
+  role_name: bitbucket_backup
+  description: Backup all bitbucket repositories of a user
+  author: Christian Fischer
+
+  license: Apache
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+
+  galaxy_tags: [git, bitbucket, backup]
+
+dependencies: []

@@ -1,0 +1,8 @@
+---
+# Mandatory Variables
+bitbucket_backup__search_user:
+
+# Optional Variables
+bitbucket_backup__workdir: /backup
+bitbucket_backup__user:
+bitbucket_backup__app_password:

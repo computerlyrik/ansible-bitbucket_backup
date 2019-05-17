@@ -1,0 +1,8 @@
+{
+  "ANSIBLE_MODULE_ARGS": {
+    "paging": "False",
+    "search_user": "computerlyrik",
+    "bitbucket_user": null,
+    "bitbucket_app_password": null
+  }
+}

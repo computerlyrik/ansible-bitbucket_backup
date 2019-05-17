@@ -1,0 +1,54 @@
+---
+
+- name: bitbucket_backup__search_user should be defined
+  assert:
+    that:
+      - bitbucket_backup__search_user is not none
+    msg: "Set the mandatory variable 'bitbucket_backup__search_user'"
+
+- name: create backup directory
+  file:
+    path: "{{ bitbucket_backup__workdir }}"
+    state: directory
+    mode: '0300'  # create and open
+
+- name: install module and role dependencies
+  package:
+    name:
+      - git-core
+      - net-tools
+      - python-pip
+
+- name: Install python-requests
+  pip:
+    name: requests
+
+
+- name: get bitbucket repositories
+  bitbucket_repositories:
+    search_user: "{{ bitbucket_backup__search_user }}"
+    bitbucket_user: "{{ bitbucket_backup__user | default(omit, true) }}"
+    bitbucket_app_password: "{{ bitbucket_backup__app_password | default(omit, true) }}"
+    paging: false
+  register: bitbucket_repositories
+
+
+- name: write index of repositories
+  copy:
+    dest: "{{ bitbucket_backup__workdir }}/index.json"
+    content: |
+      {{ bitbucket_repositories.repositories | string }}
+
+- debug:
+    var: bitbucket_repositories
+    verbosity: 2
+
+- name: backup the source codes
+  include_tasks: update_repo.yml
+  vars:
+    clone_url: "{{ item.links.clone | selectattr('name', match='https') | map(attribute='href') | first }}"
+    repo_dir: "{{ bitbucket_backup__workdir }}/{{ item.uuid }}"
+    repo_name: "{{ item.name }}"
+  loop: "{{ bitbucket_repositories.repositories }}"
+  # passwords in urls
+  no_log: true

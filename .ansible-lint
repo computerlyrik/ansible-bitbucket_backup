@@ -1,0 +1,12 @@
+parseable: true
+quiet: true
+skip_list:
+  - 703
+  - 701
+  - 401
+  - 502
+  - 303 # needs git as command to init empty bare repo
+  - 301 # https://github.com/ansible/ansible-lint/issues/490
+use_default_rules: true
+verbosity: 1
+
