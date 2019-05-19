@@ -1,3 +1,4 @@
+---
 galaxy_info:
   role_name: bitbucket_backup
   description: Backup all bitbucket repositories of a user
