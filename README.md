@@ -1,5 +1,8 @@
-Role
-====
+Ansible Bitbucket_Backup Role
+=============================
+
+[![Build Status](https://travis-ci.org/computerlyrik/ansible-bitbucket_backup.svg?branch=master)](https://travis-ci.org/computerlyrik/ansible-kopano)
+
 
 This role wraps a module called bitbucket_repositories (see below) and adds functionality to fetch all reachable bitbucket repositories.
 

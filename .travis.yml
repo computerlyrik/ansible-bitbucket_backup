@@ -1,0 +1,15 @@
+---
+sudo: required
+language: python
+dist: xenial
+services:
+  - docker
+before_install:
+  - sudo apt-get -qq update
+install:
+  - pip install 'molecule[docker]'
+script:
+  - cd ../..
+  - mv $TRAVIS_BUILD_DIR computerlyrik.bitbucket_backup
+  - cd computerlyrik.bitbucket_backup
+  - molecule test
