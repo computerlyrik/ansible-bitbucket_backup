@@ -15,9 +15,10 @@ provisioner:
   lint:
     name: ansible-lint
 
-# https://github.com/ansible/molecule/issues/1727
-# https://github.com/philpep/testinfra/pull/410
-# verifier:
-#  name: testinfra
-#  lint:
-#    name: flake8
+verifier:
+  # https://github.com/ansible/molecule/issues/1727
+  # https://github.com/philpep/testinfra/pull/410
+  enabled: False
+  name: testinfra
+  lint:
+    name: flake8
