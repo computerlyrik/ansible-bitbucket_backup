@@ -18,7 +18,8 @@ Role Variables
 **Mandatory Variables**
 
 
-| Variable Name | Mandatory | Default | Description | |---------------|-----------|---------|-------------|
+| Variable Name | Mandatory | Default | Description |
+| --------------|-----------|---------|-------------|
 | bitbucket_backup__search_user | x |         | user to search repositories for |
 | bitbucket_backup__workdir     |   | /backup | target backup root |
 | bitbucket_backup__user        |   |         | Bitbucket Username to auth with |
