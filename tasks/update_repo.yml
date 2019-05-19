@@ -5,10 +5,10 @@
   args:
     creates: "{{ repo_dir }}/HEAD"
 
-- name: set clone url
+- name: add auth to clone url
   set_fact:
     clone_url: "{{ clone_url.split('@')[0] }}:{{ bitbucket_backup__app_password }}@{{ clone_url.split('@')[1] }}"
-  when: bitbucket_backup__auth_enabled
+  when: bitbucket_backup__auth_enabled | bool
 
 # https://github.com/ansible/ansible-lint/issues/490
 - name: "fetch bitbucket repository {{ repo_name }}"
