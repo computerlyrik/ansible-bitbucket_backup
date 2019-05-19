@@ -1,5 +1,5 @@
 ---
-# Initialize bare repo first to not have the password written in the config file
+# Initialize bare repo first so password will not be written in the config file
 - name: "create bare repository for {{ repo_name }}"
   command: "git init --bare {{ repo_dir }}"
   args:
