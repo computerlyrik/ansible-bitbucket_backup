@@ -1,4 +1,4 @@
 ---
 # vars file for computerlyrik.bitbucket_backup
 
-bitbucket_backup__auth_enabled: bitbucket_backup__user is not none and bitbucket_backup__app_password is not none
+bitbucket_backup__auth_enabled: "{{ bitbucket_backup__user is not none and bitbucket_backup__app_password is not none }}"

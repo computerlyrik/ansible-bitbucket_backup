@@ -6,3 +6,5 @@ bitbucket_backup__search_user:
 bitbucket_backup__workdir: /backup
 bitbucket_backup__user:
 bitbucket_backup__app_password:
+
+bitbucket_backup__prune: False

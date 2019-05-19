@@ -7,6 +7,7 @@ skip_list:
   - 502
   - 303 # needs git as command to init empty bare repo
   - 301 # https://github.com/ansible/ansible-lint/issues/490
+  - 204 # Long lines
 use_default_rules: true
 verbosity: 1
 

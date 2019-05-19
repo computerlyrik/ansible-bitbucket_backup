@@ -5,13 +5,18 @@
   args:
     creates: "{{ repo_dir }}/HEAD"
 
-- name: add auth to clone url
+- name: create fetch url with auth
   set_fact:
-    clone_url: "{{ clone_url.split('@')[0] }}:{{ bitbucket_backup__app_password }}@{{ clone_url.split('@')[1] }}"
-  when: bitbucket_backup__auth_enabled | bool
+    fetch_url: "{{ git_url.split('@')[0] }}:{{ bitbucket_backup__app_password }}@{{ git_url.split('@')[1] }}"
+  when: bitbucket_backup__auth_enabled
+
+- name: create fetch url without auth
+  set_fact:
+    fetch_url: "{{ git_url }}"
+  when: not bitbucket_backup__auth_enabled
 
 # https://github.com/ansible/ansible-lint/issues/490
 - name: "fetch bitbucket repository {{ repo_name }}"
-  command: "git -C {{ repo_dir }} fetch --force --prune {{ clone_url }} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*"
+  command: "git -C {{ repo_dir }} fetch --force{{ ' --prune' if bitbucket_backup__prune else '' }} {{ fetch_url }} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*"
   register: git_fetch
-  changed_when: git_fetch.stdout | length > 0
+  changed_when: git_fetch.stdout | length > 0 or git_fetch.stderr | length > 0

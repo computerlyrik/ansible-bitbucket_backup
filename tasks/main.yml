@@ -23,7 +23,6 @@
   pip:
     name: requests
 
-
 - name: get bitbucket repositories
   bitbucket_repositories:
     search_user: "{{ bitbucket_backup__search_user }}"
@@ -39,14 +38,10 @@
     content: |
       {{ bitbucket_repositories.repositories | string }}
 
-- debug:
-    var: bitbucket_repositories
-    verbosity: 2
-
 - name: backup the source codes
   include_tasks: update_repo.yml
   vars:
-    clone_url: "{{ item.links.clone | selectattr('name', match='https') | map(attribute='href') | first }}"
+    git_url: "{{ item.links.clone | selectattr('name', match='https') | map(attribute='href') | first }}"
     repo_dir: "{{ bitbucket_backup__workdir }}/{{ item.uuid }}"
     repo_name: "{{ item.name }}"
   loop: "{{ bitbucket_repositories.repositories }}"

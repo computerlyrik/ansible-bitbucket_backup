@@ -26,7 +26,7 @@ Role Variables
 | bitbucket_backup__workdir     |   | /backup | target backup root |
 | bitbucket_backup__user        |   |         | Bitbucket Username to auth with |
 | bitbucket_backup__app_password|   |         | Bitbucket APP Password to auth with |
-
+| bitbucket_backup__prune|      |   | False   | Prune existing repo refs |
 
 
 Example Playbook
