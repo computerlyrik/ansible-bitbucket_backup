@@ -1,7 +1,7 @@
 Ansible Bitbucket_Backup Role
 =============================
 
-[![Build Status](https://travis-ci.org/computerlyrik/ansible-bitbucket_backup.svg?branch=master)](https://travis-ci.org/computerlyrik/ansible-kopano)
+[![Build Status](https://travis-ci.org/computerlyrik/ansible-bitbucket_backup.svg?branch=master)](https://travis-ci.org/computerlyrik/ansible-bitbucket_backup)
 
 
 Backup all public and/or private repositories of a specific account.
