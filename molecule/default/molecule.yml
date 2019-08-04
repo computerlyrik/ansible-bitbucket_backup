@@ -22,3 +22,19 @@ verifier:
   name: testinfra
   lint:
     name: flake8
+
+
+scenario:
+  test_sequence:
+    - lint
+    - cleanup
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - check
+    - side_effect
+    - verify
+    - cleanup
+    - destroy

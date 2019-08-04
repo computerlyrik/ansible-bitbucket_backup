@@ -8,30 +8,34 @@ ANSIBLE_METADATA = {
 
 DOCUMENTATION = '''
 ---
-module: my_sample_module
+module: bitbucket_repositories
 
-short_description: This is my sample module
+short_description: Gets all your repositories for further processing
 
-version_added: "2.4"
+version_added: "2.8"
 
 description:
-    - "This is my longer description explaining my sample module"
+    - "Reads the bitbucket API and sends back a json with all repository data. See call in role for an example"
 
 options:
-    name:
-        description:
-            - This is the message to send to the sample module
-        required: true
-    new:
-        description:
-            - Control to demo if the result of this module is changed or not
-        required: false
 
+    search_user:
+        description: The user / group for whom the repositories are listet
+        required: true
+    bitbucket_user:
+        description: The user to login agains bitbucket API
+        required: false
+    bitbucket_app_password:
+        description: The **APP**-password to login against bitbucket API
+        required: false
+    paging:
+        description: If you like to have paged output or all-at-once
+        required: false
 extends_documentation_fragment:
     - azure
 
 author:
-    - Your Name (@yourhandle)
+    - Christian Fischer (@computerlyrik)
 '''
 
 EXAMPLES = '''
@@ -50,15 +54,7 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-search_user:
-    description: The user to have the repositories listed
-    type: str
-bitbucket_user:
-    description: The user to login agains bitbucket API
-bitbucket_app_password:
-    description: The APP-password to login against bitbucket API
-paging:
-    description: If you like to have paged output or all-at-once
+A complex bitbucket API json object
 '''
 
 from ansible.module_utils.basic import AnsibleModule
@@ -115,15 +111,13 @@ def run_module():
       except KeyError:
         break
 
-    # manipulate or modify the state as needed (this is going to be the
-    # part where your module will do what it needs to do)
+    # manipulate or modify the state as needed
     result['repositories'] = results
 
-    # if the user is working with this module in only check mode we do not
-    # want to make any changes to the environment, just return the current
-    # state with no modifications
-    if module.check_mode:
-        return result
+    # Due to this is a readonly module, we do not do any changes
+    # and can send back the acquired information directly to the caller
+    #if module.check_mode:
+    #    return result
 
     module.exit_json(**result)
 
